@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}TravelGraph{% endblock %}</title>
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><text y=%2220%22 font-size=%2220%22>🧭</text></svg>">
+</head>
+<body data-theme="light">
+
+<header class="tg-navbar">
+  <div class="tg-navbar-inner">
+    <a class="tg-brand" href="{{ url_for('home') }}">
+      <span class="tg-brand-icon">🧭</span>
+      <span class="tg-brand-text">TravelGraph</span>
+    </a>
+
+    <button class="tg-nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="tg-nav-links" id="navLinks">
+      <a href="{{ url_for('home') }}" class="{{ 'active' if active_page == 'home' else '' }}">Home</a>
+      <a href="{{ url_for('planner') }}" class="{{ 'active' if active_page == 'planner' else '' }}">Directions</a>
+      <a href="{{ url_for('planner') }}#explore" class="{{ 'active' if active_page == 'explore' else '' }}">Explore Map</a>
+      <a href="{{ url_for('algorithm_page') }}" class="{{ 'active' if active_page == 'algorithm' else '' }}">Dijkstra</a>
+      <a href="{{ url_for('graph_explorer') }}" class="{{ 'active' if active_page == 'graph' else '' }}">Graph</a>
+      <a href="{{ url_for('about') }}" class="{{ 'active' if active_page == 'about' else '' }}">About</a>
+      <button class="tg-theme-toggle" id="themeToggle" title="Toggle dark mode">🌙</button>
+    </nav>
+  </div>
+</header>
+
+<main class="tg-main">
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="tg-footer">
+  <p>TravelGraph — Smart Travel Planner Using Graph Algorithms. Built for educational purposes. Map data &copy; OpenStreetMap contributors.</p>
+</footer>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

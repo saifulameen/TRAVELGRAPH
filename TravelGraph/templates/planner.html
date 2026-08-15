@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Directions — TravelGraph{% endblock %}
+
+{% block content %}
+<div class="tg-planner" id="explore">
+
+  <aside class="tg-directions-panel" id="directionsPanel">
+    <div class="tg-directions-header">
+      <h2>Directions</h2>
+    </div>
+
+    <div class="tg-directions-form">
+      <div class="tg-input-row">
+        <span class="tg-input-badge tg-badge-a">A</span>
+        <div class="tg-search-wrap">
+          <input type="text" id="sourceInput" placeholder="Search starting location" autocomplete="off">
+          <div class="tg-suggestions" id="sourceSuggestions"></div>
+        </div>
+      </div>
+
+      <button class="tg-swap-btn" id="swapBtn" title="Swap locations">⇅</button>
+
+      <div class="tg-input-row">
+        <span class="tg-input-badge tg-badge-b">B</span>
+        <div class="tg-search-wrap">
+          <input type="text" id="destInput" placeholder="Search destination" autocomplete="off">
+          <div class="tg-suggestions" id="destSuggestions"></div>
+        </div>
+      </div>
+
+      <button class="tg-btn tg-btn-primary tg-btn-full" id="getDirectionsBtn">Get Directions</button>
+      <p class="tg-form-note">Supports 15 pre-mapped Indian cities in the academic graph.</p>
+    </div>
+
+    <div class="tg-error-box" id="errorBox" style="display:none;"></div>
+
+    <div class="tg-route-result" id="routeResult" style="display:none;">
+      <hr class="tg-divider">
+
+      <div class="tg-route-summary">
+        <div class="tg-route-time" id="routeTime">--</div>
+        <div class="tg-route-distance" id="routeDistance">--</div>
+        <div class="tg-route-label" id="routeLabel"></div>
+      </div>
+
+      <div class="tg-route-via" id="routeVia"></div>
+
+      <div class="tg-route-path-title">Recommended Route</div>
+      <div class="tg-route-path" id="routePath"></div>
+
+      <div class="tg-route-stats" id="routeStats"></div>
+
+      <button class="tg-btn tg-btn-secondary tg-btn-full" id="viewDetailsBtn">View Route Details</button>
+
+      <div class="tg-route-details" id="routeDetails" style="display:none;"></div>
+
+      <div class="tg-alt-routes" id="altRoutes" style="display:none;"></div>
+    </div>
+  </aside>
+
+  <div class="tg-map-container">
+    <div id="mainMap" class="tg-main-map"></div>
+
+    <div class="tg-map-controls">
+      <button class="tg-map-btn" id="fitRouteBtn" title="Fit Route">Fit Route</button>
+      <button class="tg-map-btn" id="myLocationBtn" title="My Location">📍 My Location</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+<script src="{{ url_for('static', filename='js/planner.js') }}"></script>
+{% endblock %}

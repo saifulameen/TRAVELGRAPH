@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block title %}Dijkstra Algorithm — TravelGraph{% endblock %}
+
+{% block content %}
+<div class="tg-page-container">
+
+  <section class="tg-edu-section">
+    <h1>Dijkstra's Algorithm</h1>
+    <p class="tg-edu-intro">
+      Dijkstra's algorithm finds the shortest path from a source vertex
+      to every other vertex in a weighted graph with non-negative edge
+      weights. TravelGraph uses it to compute the shortest route between
+      cities in the academic city graph.
+    </p>
+
+    <div class="tg-edu-grid">
+      <div class="tg-edu-card">
+        <h3>What is Dijkstra?</h3>
+        <p>
+          It's a greedy shortest-path algorithm. Starting from the source
+          city, it repeatedly visits the closest unvisited city and updates
+          the shortest known distance to its neighbours, until every
+          reachable city has been finalized.
+        </p>
+      </div>
+      <div class="tg-edu-card">
+        <h3>How It Works</h3>
+        <ol class="tg-steps-list">
+          <li>Start from source, set its distance to 0.</li>
+          <li>Put the source into a min-priority queue.</li>
+          <li>Pop the nearest unvisited node.</li>
+          <li>Check its neighbours.</li>
+          <li>Relax edges — update shorter distances.</li>
+          <li>Push updated neighbours back into the queue.</li>
+          <li>Repeat until destination is finalized.</li>
+          <li>Reconstruct the shortest path via predecessor pointers.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="tg-visualizer-section">
+    <h2>Dijkstra Visualizer</h2>
+    <p class="tg-edu-intro">
+      Select a source and destination below to run the actual TravelGraph
+      Dijkstra implementation and step through exactly how it explores
+      the graph.
+    </p>
+
+    <div class="tg-viz-controls-top">
+      <div class="tg-viz-select-group">
+        <label for="vizSource">Source</label>
+        <select id="vizSource">
+          {% for city in cities %}
+          <option value="{{ city }}" {{ 'selected' if city == 'Chennai' else '' }}>{{ city }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="tg-viz-select-group">
+        <label for="vizDest">Destination</label>
+        <select id="vizDest">
+          {% for city in cities %}
+          <option value="{{ city }}" {{ 'selected' if city == 'Coimbatore' else '' }}>{{ city }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button class="tg-btn tg-btn-primary" id="vizRunBtn">Visualize Dijkstra</button>
+    </div>
+
+    <div class="tg-error-box" id="vizErrorBox" style="display:none;"></div>
+
+    <div class="tg-viz-panel" id="vizPanel" style="display:none;">
+      <div class="tg-viz-map-wrap">
+        <div id="vizMap" class="tg-viz-map"></div>
+      </div>
+
+      <div class="tg-viz-info">
+        <div class="tg-viz-step-header">
+          <span id="vizStepLabel">Step 0 / 0</span>
+        </div>
+
+        <div class="tg-viz-info-row">
+          <span class="tg-viz-info-label">Current Node</span>
+          <span class="tg-viz-info-value" id="vizCurrentNode">—</span>
+        </div>
+        <div class="tg-viz-info-row">
+          <span class="tg-viz-info-label">Current Distance</span>
+          <span class="tg-viz-info-value" id="vizCurrentDistance">—</span>
+        </div>
+
+        <div class="tg-viz-list-block">
+          <span class="tg-viz-info-label">Visited</span>
+          <div class="tg-viz-tags" id="vizVisited"></div>
+        </div>
+
+        <div class="tg-viz-list-block">
+          <span class="tg-viz-info-label">Priority Queue</span>
+          <div class="tg-viz-pq" id="vizPQ"></div>
+        </div>
+
+        <div class="tg-viz-controls-bottom">
+          <button class="tg-btn tg-btn-small" id="vizPrevBtn">Previous</button>
+          <button class="tg-btn tg-btn-small tg-btn-primary" id="vizPlayBtn">Play</button>
+          <button class="tg-btn tg-btn-small" id="vizNextBtn">Next</button>
+          <button class="tg-btn tg-btn-small" id="vizResetBtn">Reset</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+<script src="{{ url_for('static', filename='js/algorithm.js') }}"></script>
+{% endblock %}

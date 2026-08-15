@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Graph Explorer — TravelGraph{% endblock %}
+
+{% block content %}
+<div class="tg-page-container">
+  <h1>Graph Explorer</h1>
+  <p class="tg-edu-intro">
+    This page shows the underlying weighted graph that powers TravelGraph's
+    route planning — the traditional Data Structures view of the project.
+  </p>
+
+  <div class="tg-graph-stats" id="graphStats">
+    <div class="tg-stat-card"><span class="tg-stat-value" id="statVertices">—</span><span class="tg-stat-label">Vertices</span></div>
+    <div class="tg-stat-card"><span class="tg-stat-value" id="statEdges">—</span><span class="tg-stat-label">Edges</span></div>
+    <div class="tg-stat-card"><span class="tg-stat-value">Weighted<br>Undirected</span><span class="tg-stat-label">Graph Type</span></div>
+    <div class="tg-stat-card"><span class="tg-stat-value">Adjacency<br>List</span><span class="tg-stat-label">Representation</span></div>
+    <div class="tg-stat-card"><span class="tg-stat-value">Min Heap</span><span class="tg-stat-label">Priority Queue</span></div>
+    <div class="tg-stat-card"><span class="tg-stat-value">Dijkstra</span><span class="tg-stat-label">Algorithm</span></div>
+  </div>
+
+  <div class="tg-graph-layout">
+    <div class="tg-graph-canvas-wrap">
+      <svg id="graphSvg" class="tg-graph-svg" viewBox="0 0 800 600"></svg>
+    </div>
+
+    <div class="tg-adjacency-panel">
+      <h3>Adjacency List</h3>
+      <div class="tg-adjacency-list" id="adjacencyList"></div>
+    </div>
+  </div>
+
+  <p class="tg-graph-note">
+    Distances shown are approximate educational values used to demonstrate
+    Dijkstra's algorithm, and are not intended as official road-distance data.
+  </p>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/graph.js') }}"></script>
+{% endblock %}

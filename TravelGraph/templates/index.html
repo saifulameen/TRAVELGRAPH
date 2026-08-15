@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}TravelGraph — Smart Travel Planning{% endblock %}
+
+{% block content %}
+<section class="tg-hero">
+  <div class="tg-hero-text">
+    <h1>TravelGraph</h1>
+    <p class="tg-hero-sub">Smart Travel Planning<br>Powered by Graph Algorithms</p>
+    <p class="tg-hero-desc">
+      Find efficient routes between destinations using Dijkstra's shortest
+      path algorithm running on a real weighted city graph.
+    </p>
+    <a class="tg-btn tg-btn-primary tg-btn-large" href="{{ url_for('planner') }}">Plan Your Route</a>
+  </div>
+</section>
+
+<section class="tg-map-preview-wrap">
+  <div id="previewMap" class="tg-map-preview"></div>
+</section>
+
+<section class="tg-features">
+  <div class="tg-feature-card">
+    <div class="tg-feature-icon">🗺️</div>
+    <h3>Interactive Maps</h3>
+    <p>Real-time map visualization powered by Leaflet &amp; OpenStreetMap.</p>
+  </div>
+  <div class="tg-feature-card">
+    <div class="tg-feature-icon">⚡</div>
+    <h3>Shortest Routes</h3>
+    <p>Routes calculated using a hand-written Dijkstra's Algorithm.</p>
+  </div>
+  <div class="tg-feature-card">
+    <div class="tg-feature-icon">🧠</div>
+    <h3>Smart Planning</h3>
+    <p>Cities and roads modeled as a weighted graph under the hood.</p>
+  </div>
+  <div class="tg-feature-card">
+    <div class="tg-feature-icon">📊</div>
+    <h3>Route Analysis</h3>
+    <p>Compare travel paths and inspect the algorithm step-by-step.</p>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    initPreviewMap('previewMap');
+  });
+</script>
+{% endblock %}

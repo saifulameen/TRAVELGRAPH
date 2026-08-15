@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}About — TravelGraph{% endblock %}
+
+{% block content %}
+<div class="tg-page-container">
+  <h1>About TravelGraph</h1>
+  <p class="tg-edu-intro">
+    TravelGraph is a college Data Structures &amp; Algorithms project that
+    demonstrates graphs, weighted graphs, adjacency lists, priority queues,
+    and Dijkstra's shortest-path algorithm inside a real-feeling travel
+    planning application.
+  </p>
+
+  <div class="tg-about-grid">
+    <div class="tg-edu-card">
+      <h3>Graph</h3>
+      <p>A collection of vertices (cities) connected by edges (roads). In TravelGraph, each city is a vertex, and each direct road connection between two cities is an edge.</p>
+    </div>
+    <div class="tg-edu-card">
+      <h3>Weighted Graph</h3>
+      <p>A graph whose edges carry a numeric value — here, the approximate distance in kilometers between two directly connected cities.</p>
+    </div>
+    <div class="tg-edu-card">
+      <h3>Adjacency List</h3>
+      <p>Each city stores a dictionary of its directly connected neighbouring cities and the distance to each. This is more memory-efficient than an adjacency matrix for sparse graphs like a road network.</p>
+    </div>
+    <div class="tg-edu-card">
+      <h3>Priority Queue</h3>
+      <p>Dijkstra's algorithm needs to repeatedly find the unvisited city with the smallest known distance. A min-heap priority queue (Python's <code>heapq</code>) makes this efficient — O(log n) per insertion/removal instead of scanning the whole list.</p>
+    </div>
+    <div class="tg-edu-card">
+      <h3>Dijkstra's Algorithm</h3>
+      <p>A greedy shortest-path algorithm that, starting from the source, finalizes the shortest distance to one new city at a time until the destination is reached, using the priority queue to always expand the currently-closest city.</p>
+    </div>
+    <div class="tg-edu-card">
+      <h3>Real-World Applications</h3>
+      <ul class="tg-app-list">
+        <li>GPS navigation systems</li>
+        <li>Computer network routing</li>
+        <li>Logistics and supply chain planning</li>
+        <li>Delivery and courier systems</li>
+        <li>Public transportation planning</li>
+        <li>Digital maps and route planners</li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="tg-tech-note">
+    <h2>How It Works Together</h2>
+    <p>
+      The cities are represented as vertices in a weighted graph. The roads
+      between them are weighted edges where the weight represents an
+      approximate distance, stored using an adjacency list. When a user
+      selects a source and destination, a hand-written implementation of
+      Dijkstra's algorithm — using a priority queue — finds the shortest
+      path through that graph. The resulting city path is then displayed on
+      an interactive map, with OpenStreetMap and OSRM used only to draw
+      realistic road geometry for that already-determined path.
+    </p>
+  </section>
+</div>
+{% endblock %}
